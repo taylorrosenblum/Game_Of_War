@@ -64,7 +64,7 @@ for x in range(26):
   player_two.add_cards(new_deck.deal_one())
 
 game_on = True
-
+winner = None
 round_num = 0
 war_rounds = 0
 table = [] # cards on the table
@@ -136,7 +136,7 @@ while game_on:
       war_rounds += 1
       
     if at_war==False:
-      print("\n\tWAR ATTRITION: {} rounds".format(war_rounds))
+      print("\tWAR ATTRITION: {} rounds".format(war_rounds))
       print("\t{} drew {}".format(player_one.name, player_one_card))
       print("\t{} drew {}".format(player_two.name, player_two_card))
       table = []
@@ -152,7 +152,13 @@ while game_on:
     if  len(player.all_cards) == 52:
       game_on = False
       winner = player
-  round_num += 1  
+  round_num += 1
+
+  if round_num > 5000:
+    game_on = False  
 
 # game is over, declare the winner
-print("\n\n####### The winner is : {} #######".format(winner.name))
+if winner == None:
+  print("\n\n####### Something went wrong, too many rounds #######\n\n")
+else:
+  print("\n\n####### The winner is : {} #######\n\n".format(winner.name))
